@@ -1,0 +1,11 @@
+.container {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 100px min-content;
+  max-width: 960px;
+  min-height: 100vh;
+  margin: 10px auto;
+  color: #5c6e86;
+  font-size: 16px;
+}

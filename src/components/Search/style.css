@@ -1,0 +1,13 @@
+.header-search {
+  flex-grow: 2;
+  padding-left: 0;
+  padding: 10px;
+}
+
+.header-search_input {
+  max-width: 80%;
+  background-image: url("../../icon/loupe.svg") !important;
+  background-repeat: no-repeat !important;
+  background-size: 1.5rem !important;
+  background-position: calc(100% - 1rem) 50% !important;
+}
