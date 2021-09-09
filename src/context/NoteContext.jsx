@@ -1,16 +1,20 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { idGenerator } from "../utils/idGenerator";
 
 export const NoteContext = createContext();
 
 const NoteContextProvider = (props) => {
-  const initialState = [];
+  const initialState = JSON.parse(localStorage.getItem("notes")) || [];
   const [notes, setNotes] = useState(initialState);
   const [redirectId, setRedirectId] = useState();
 
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
+
   const addNote = (title = "New note", description = "") => {
     const id = idGenerator();
-    setNotes([{ id, title, description }, ...notes]);
+    setNotes([{ id, title, description, timestamp: Date.now() }, ...notes]);
     return id;
   };
 
@@ -18,7 +22,7 @@ const NoteContextProvider = (props) => {
 
   const updateNote = (id, title, description) => {
     const newNotes = notes.map((note) =>
-      note.id === id ? { id, title, description } : note
+      note.id === id ? { ...note, id, title, description } : note
     );
     setNotes(newNotes);
   };
