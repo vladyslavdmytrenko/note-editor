@@ -1,4 +1,5 @@
 .header-search {
+  position: relative;
   flex-grow: 2;
   padding-left: 0;
   padding: 10px;
@@ -10,4 +11,29 @@
   background-repeat: no-repeat !important;
   background-size: 1.5rem !important;
   background-position: calc(100% - 1rem) 50% !important;
+}
+
+.drop-down-list{
+  position: absolute;
+  top: 4rem;
+  left: 10px;
+  min-width: 80%;
+  background-color: #fff;
+  z-index: 100;
+}
+
+.drop-down-list ul {
+  list-style-type: none
+}
+
+.drop-down-list ul a{
+  width: 100%;
+  margin: 1rem;
+  text-decoration: none;
+  font-size: 1rem;
+  color: #5c6e86;
+}
+
+.hide{
+  display: none !important;
 }
