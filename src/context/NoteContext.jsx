@@ -7,6 +7,7 @@ const NoteContextProvider = (props) => {
   const initialState = JSON.parse(localStorage.getItem("notes")) || [];
   const [notes, setNotes] = useState(initialState);
   const [redirectId, setRedirectId] = useState();
+  const [typeSort, setTypeSort] = useState("none_date");
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
@@ -14,6 +15,7 @@ const NoteContextProvider = (props) => {
 
   const addNote = (title = "New note", description = "") => {
     const id = idGenerator();
+    setTypeSort("none_date");
     setNotes([{ id, title, description, timestamp: Date.now() }, ...notes]);
     return id;
   };
@@ -47,6 +49,34 @@ const NoteContextProvider = (props) => {
     if (!path && notes.length > 0) path = notes[0].id;
     return path;
   };
+
+  const sortNotes = (newTypeSort) => {
+    const newArr = [...notes].sort((a, b) => {
+      switch (newTypeSort) {
+        case "desc_date":
+          if (a.timestamp > b.timestamp) return -1;
+          if (a.timestamp < b.timestamp) return 1;
+          return 0;
+        case "asc_date":
+          if (a.timestamp < b.timestamp) return -1;
+          if (a.timestamp > b.timestamp) return 1;
+          return 0;
+        case "desc_title":
+          if (a.title > b.title) return -1;
+          if (a.title < b.title) return 1;
+          return 0;
+        case "asc_title":
+          if (a.title < b.title) return -1;
+          if (a.title > b.title) return 1;
+          return 0;
+        default:
+          break;
+      }
+    });
+    setTypeSort(newTypeSort);
+    setNotes(newArr);
+  };
+
   return (
     <NoteContext.Provider
       value={{
@@ -56,6 +86,8 @@ const NoteContextProvider = (props) => {
         updateNote,
         removeNote,
         getRedirectTo,
+        sortNotes,
+        typeSort,
       }}
     >
       {props.children}
