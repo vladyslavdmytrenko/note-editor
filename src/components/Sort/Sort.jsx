@@ -92,17 +92,6 @@ function Sort() {
           </div>
         </div>
       </div>
-
-      {/* <button className="btn-icon">
-        <span>Title</span>
-        <img src={SortIcon} alt="search" className="icon" />
-        <div className="dropdown">
-          <img src={SortIcon} alt="search" className="icon" />
-          <img src={SortIcon} alt="search" className="icon" />
-          <img src={SortIcon} alt="search" className="icon" />
-        </div>
-      </button>
-      <button className="btn-icon"></button> */}
     </form>
   );
 }
